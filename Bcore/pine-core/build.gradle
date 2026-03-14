@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    namespace "top.canyie.pine"
+    compileSdk rootProject.ext.compileSdkVer
+    buildToolsVersion rootProject.ext.buildToolsVer
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.minSdkVer
+        targetSdk rootProject.ext.targetSdkVer
+        versionCode rootProject.ext.libVersionCode
+        versionName rootProject.ext.libVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -17,7 +18,6 @@ android {
             cmake {
                 cFlags '-Wall -Wextra -Werror -fvisibility=hidden -fvisibility-inlines-hidden'
                 cppFlags '-std=c++17 -fno-exceptions -fno-rtti'
-                // arguments '-DANDROID_STL=none' // built-in libcxx has exception
                 abiFilters 'armeabi-v7a', 'arm64-v8a'
                 targets 'pine'
             }
@@ -33,31 +33,12 @@ android {
 
     externalNativeBuild {
         cmake {
+            version rootProject.ext.cmakeVer
             path "src/main/cpp/CMakeLists.txt"
         }
-    }
-
-    buildFeatures {
-        // prefab true
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // implementation 'dev.rikka.ndk.thirdparty:cxx:1.1.0'
 }
-
-/*
-apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    userOrg = rootProject.userOrg
-    repoName = rootProject.repoName
-    groupId = rootProject.groupId
-    artifactId = 'core'
-    publishVersion = '0.2.5'
-    desc = 'pine hook core library'
-    licences = rootProject.licences
-    website = rootProject.website
-}
- */

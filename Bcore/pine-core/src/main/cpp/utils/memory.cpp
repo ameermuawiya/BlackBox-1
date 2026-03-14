@@ -43,7 +43,7 @@ void* Memory::AllocUnprotected(size_t size) {
         return nullptr;
     }
     if (PineConfig::debug)
-        LOGD("Mapped new memory %p (size %u)", mapped, page_size);
+        LOGD("Mapped new memory %p (size %zu)", mapped, page_size);
 
     if (!PineConfig::anti_checks)
         prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME, mapped, size, "pine codes");

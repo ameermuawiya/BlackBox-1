@@ -1,42 +1,31 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    ext.kotlin_version = "1.4.31"
-    repositories {
-        jcenter()
-        mavenCentral()
-        google()
-        maven { url 'https://jitpack.io' }
-//        maven { url 'https://dl.bintray.com/umsdk/release' }
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+// Top-level build file for centralized configuration.
+
+plugins {
+    id 'com.android.application' version '9.0.0' apply false
+    id 'com.android.library' version '9.0.0' apply false
 }
 
-allprojects {
-    repositories {
-        jcenter()
-        mavenCentral()
-        google()
-        maven { url 'https://jitpack.io' }
-//        maven { url 'https://dl.bintray.com/umsdk/release' }
-    }
+// Global configuration block accessible by all sub-modules
+ext {
+    // SDK Versions
+    compileSdkVer = 36
+    minSdkVer = 21
+    targetSdkVer = 34
+    buildToolsVer = "36.0.0"
+
+    // App Versioning
+    appVersionCode = 12
+    appVersionName = "2.1.0"
+    libVersionCode = 1
+    libVersionName = "1.0"
+
+    // Library Versions
+    appcompatVer = "1.7.1"
+    materialVer = "1.14.0-alpha09"
+    blackReflectionVer = "1.1.2"
+    cmakeVer = "4.1.2"
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-
-ext {
-    compileSdkVersion = 33 
-    buildToolsVersion = "28.0.2"
-    targetSdkVersion = 28
-
-    versionName = '1.0'
-    versionCode = 1
-
-    xVersion = '1.1.0'
-    blackReflection = '1.1.2'
+    delete rootProject.layout.buildDirectory
 }

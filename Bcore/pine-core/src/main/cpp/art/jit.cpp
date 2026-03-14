@@ -120,7 +120,7 @@ bool Jit::DisableInline() {
     } else {
         // It is not a normal inline_max_code_units. It may be that the offset is changed
         // due to the source code modified by the manufacturer of the device.
-        LOGE("Unexpected inline_max_code_units value %u (offset %d).", inline_max_code_units,
+        LOGE("Unexpected inline_max_code_units value %zu (offset %d).", inline_max_code_units,
              CompilerOptions_inline_max_code_units->GetOffset());
         return false;
     }

@@ -1,7 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="top.niunaijun.blackbox">
-
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-sdk tools:overrideLibrary="com.google.android.material" />
     <!-- unknown -->
     <uses-permission android:name="android.permission.WRITE_SOCIAL_STREAM" />
     <uses-permission android:name="android.permission.READ_SOCIAL_STREAM" />
@@ -95,9 +95,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <!-- 相机 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-
+   
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
@@ -125,7 +123,7 @@
     <!-- 身体传感器 -->
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <!-- 锁屏-->
+    <!-- 锁屏 -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <!-- 允许应用程序展开或折叠状态栏 -->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
@@ -134,7 +132,7 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <!-- 通话状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 修改当前配置-->
+    <!-- 修改当前配置 -->
     <uses-permission
         android:name="android.permission.CHANGE_CONFIGURATION"
         tools:ignore="ProtectedPermissions" />
@@ -167,7 +165,7 @@
     <uses-permission android:name="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" />
     <!-- browser history end -->
 
-    <!-- 清空应用缓存-->
+    <!-- 清空应用缓存 -->
     <uses-permission
         android:name="android.permission.CLEAR_APP_CACHE"
         tools:ignore="ProtectedPermissions" />
@@ -242,9 +240,9 @@
     <uses-permission
         android:name="android.permission.DEVICE_POWER"
         tools:ignore="ProtectedPermissions" />
-    <!--    <uses-permission-->
-    <!--        android:name="android.permission.WRITE_APN_SETTINGS"-->
-    <!--        tools:ignore="ProtectedPermissions" />-->
+    <!-- <uses-permission -->
+    <!-- android:name="android.permission.WRITE_APN_SETTINGS" -->
+    <!-- tools:ignore="ProtectedPermissions" /> -->
 
     <!-- xdja -->
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
@@ -276,7 +274,6 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <!-- xdja -->
-    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <!-- 安全接入 -->
@@ -326,7 +323,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-    <!--android11-->
+    <!-- android11 -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application>
@@ -336,7 +333,7 @@
             android:exported="false"
             android:process="@string/black_box_service_name" />
 
-        <!--file provider-->
+        <!-- file provider -->
         <provider
             android:name=".fake.provider.FileProvider"
             android:authorities="${applicationId}.blackbox.FileProvider"

@@ -1,27 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    namespace "top.canyie.dreamland"
+    compileSdk rootProject.ext.compileSdkVer
+    buildToolsVersion rootProject.ext.buildToolsVer
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.minSdkVer
+        targetSdk rootProject.ext.targetSdkVer
+        versionCode rootProject.ext.libVersionCode
+        versionName rootProject.ext.libVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-
-//        externalNativeBuild {
-//            cmake {
-//                cFlags '-Wall -Wextra -Werror -fvisibility=hidden -fvisibility-inlines-hidden'
-//                cppFlags '-std=c++17 -fno-exceptions -fno-rtti'
-//                // arguments '-DANDROID_STL=none' // built-in libcxx has exception
-//                abiFilters 'armeabi-v7a', 'arm64-v8a'
-//                targets 'pine'
-//            }
-//        }
     }
 
     buildTypes {
@@ -29,16 +20,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-//
-//    externalNativeBuild {
-//        cmake {
-//            path "src/main/cpp/CMakeLists.txt"
-//        }
-//    }
-
-    buildFeatures {
-        // prefab true
     }
 }
 

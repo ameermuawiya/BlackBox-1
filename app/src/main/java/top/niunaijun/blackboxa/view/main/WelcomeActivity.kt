@@ -9,7 +9,10 @@ import top.niunaijun.blackboxa.view.list.ListViewModel
 
 class WelcomeActivity : AppCompatActivity() {
 
-    override fun onNewIntent(intent: Intent?) {
+    /*
+     * Updated Intent to non-null
+     */
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         jump()
     }
@@ -26,7 +29,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun previewInstalledAppList(){
-        val viewModel = ViewModelProvider(this,InjectionUtil.getListFactory()).get(ListViewModel::class.java)
+        val viewModel = ViewModelProvider(this, InjectionUtil.getListFactory()).get(ListViewModel::class.java)
         viewModel.previewInstalledList()
     }
 }

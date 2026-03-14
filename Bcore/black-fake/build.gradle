@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    namespace "top.niunaijun.blackbox.fake"
+    compileSdk rootProject.ext.compileSdkVer
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.minSdkVer
+        targetSdk rootProject.ext.targetSdkVer
+        versionCode rootProject.ext.libVersionCode
+        versionName rootProject.ext.libVersionName
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -20,41 +20,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dexOptions {
-        preDexLibraries false
-        maxProcessCount 8
-        javaMaxHeapSize "4g"
-    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-    aaptOptions {
-        cruncherEnabled = false
-        useNewCruncher = false
-    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
-    lintOptions {
+
+    lint {
         checkReleaseBuilds false
         abortOnError false
         warningsAsErrors false
-        disable "UnusedResources", 'RestrictedApi'
-        textOutput "stdout"
+        disable += ["UnusedResources", "RestrictedApi"]
+        textOutput file("stdout")
         textReport false
-        check 'NewApi', 'InlinedApi'
+        checkOnly += ["NewApi", "InlinedApi"]
     }
 }
 
-
-tasks.withType(Javadoc) {
+tasks.withType(Javadoc).configureEach {
     options.addStringOption('Xdoclint:none', '-quiet')
     options.addStringOption('encoding', 'UTF-8')
     options.addStringOption('charSet', 'UTF-8')
 }
 
-
 dependencies {
-    implementation project(':Bcore:black-hook')
+    implementation project(':Bcore:black-hook') 
 }

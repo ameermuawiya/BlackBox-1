@@ -2,6 +2,7 @@ package top.niunaijun.blackboxa.app.rocker
 
 import android.app.Activity
 import android.app.Application
+import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.widget.FrameLayout
@@ -15,20 +16,13 @@ import top.niunaijun.blackboxa.widget.EnFloatView
 import kotlin.math.cos
 import kotlin.math.sin
 
-/**
- *
- * @Description:
- * @Author: kotlinMiku
- * @CreateDate: 2022/3/19 19:37
- */
 object RockerManager {
 
     private const val TAG = "RockerManager"
 
+    private const val Ea = 6378137     // Equatorial radius  
 
-    private const val Ea = 6378137     //   赤道半径  
-
-    private const val Eb = 6356725     //   极半径 
+    private const val Eb = 6356725     // Polar radius 
 
     fun init(application: Application?, userId: Int) {
 
@@ -40,10 +34,9 @@ object RockerManager {
 
         if (enFloatView is EnFloatView) {
             enFloatView.setListener { angle: Float, distance: Float ->
-                changeLocation(distance, angle, application.packageName,userId)
+                changeLocation(distance, angle, application.packageName, userId)
             }
         }
-
 
         application.registerActivityLifecycleCallbacks(object : BaseActivityLifecycleCallback {
 
@@ -57,12 +50,16 @@ object RockerManager {
                 FloatingView.get().detach(activity)
             }
 
+            /*
+             * Override the method with correct signature
+             */
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+                // Do nothing
+            }
         })
-
     }
 
     private fun initFloatView(): FloatingMagnetView? {
-
         val params = FrameLayout.LayoutParams(
             RelativeLayout.LayoutParams.WRAP_CONTENT,
             RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -83,7 +80,6 @@ object RockerManager {
         val dx = distance  * sin(angle * Math.PI / 180.0)
         val dy = distance  * cos(angle * Math.PI / 180.0)
 
-
         val ec = Eb + (Ea - Eb) * (90.0 - location.latitude) / 90.0
         val ed = ec * cos(location.latitude * Math.PI / 180)
 
@@ -94,6 +90,4 @@ object RockerManager {
 
         BLocationManager.get().setLocation(userId, packageName, newLocation)
     }
-
-
 }

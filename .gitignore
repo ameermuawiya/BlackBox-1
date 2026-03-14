@@ -86,3 +86,6 @@ lint/tmp/
 
 # mac
 *.DS_Store
+
+.acside/
+gradle/gradle-daemon-jvm.properties

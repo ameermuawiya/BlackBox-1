@@ -1,13 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    namespace "top.canyie.pine.xposed"
+    compileSdk rootProject.ext.compileSdkVer
+    buildToolsVersion rootProject.ext.buildToolsVer
+    
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.minSdkVer
+        targetSdk rootProject.ext.targetSdkVer
+        versionCode rootProject.ext.libVersionCode
+        versionName rootProject.ext.libVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -31,18 +33,3 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly project(':Bcore:pine-core')
 }
-
-/*
-apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    userOrg = rootProject.userOrg
-    repoName = rootProject.repoName
-    groupId = rootProject.groupId
-    artifactId = 'xposed'
-    publishVersion = '0.0.8'
-    desc = 'pine hook xposed compat'
-    licences = rootProject.licences
-    website = rootProject.website
-}
-*/

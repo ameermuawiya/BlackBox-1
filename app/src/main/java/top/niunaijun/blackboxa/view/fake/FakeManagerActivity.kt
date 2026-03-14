@@ -22,23 +22,14 @@ import top.niunaijun.blackboxa.util.inflate
 import top.niunaijun.blackboxa.util.toast
 import top.niunaijun.blackboxa.view.base.BaseActivity
 
-/**
- *
- * @Author: BlackBoxing
- * @CreateDate: 2022/3/14
- */
 class FakeManagerActivity : BaseActivity() {
     val TAG: String = "FakeManagerActivity"
 
     private val viewBinding: ActivityListBinding by inflate()
-
-    //    private lateinit var mAdapter: ListAdapter
     private lateinit var mAdapter: RVAdapter<FakeLocationBean>
-
     private lateinit var viewModel: FakeLocationViewModel
 
     private var appList: List<FakeLocationBean> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +37,7 @@ class FakeManagerActivity : BaseActivity() {
 
         initToolbar(viewBinding.toolbarLayout.toolbar, R.string.fake_location, true)
 
-        mAdapter = RVAdapter<FakeLocationBean>(this,FakeLocationAdapter()).bind(viewBinding.recyclerView)
+        mAdapter = RVAdapter<FakeLocationBean>(this, FakeLocationAdapter()).bind(viewBinding.recyclerView)
             .setItemClickListener { _, data, _ ->
 
                 val intent = Intent(this, FollowMyLocationOverlay::class.java)
@@ -55,26 +46,25 @@ class FakeManagerActivity : BaseActivity() {
 
                 locationResult.launch(intent)
             }.setItemLongClickListener { _, item, position ->
-                disableFakeLocation(item,position)
+                disableFakeLocation(item, position)
             }
 
         viewBinding.recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         initSearchView()
         initViewModel()
     }
 
-    private fun disableFakeLocation(item: FakeLocationBean,position:Int) {
+    private fun disableFakeLocation(item: FakeLocationBean, position: Int) {
         MaterialDialog(this).show {
             title(R.string.close_fake_location)
-            message(text = getString(R.string.close_app_fake_location,item.name))
+            message(text = getString(R.string.close_app_fake_location, item.name))
             negativeButton(R.string.cancel)
-            positiveButton(R.string.done){
-                BLocationManager.disableFakeLocation(currentUserID(),item.packageName)
-                toast(getString(R.string.close_fake_location_success,item.name))
+            positiveButton(R.string.done) {
+                BLocationManager.disableFakeLocation(currentUserID(), item.packageName)
+                toast(getString(R.string.close_fake_location_success, item.name))
                 item.fakeLocationPattern = BLocationManager.CLOSE_MODE
-                mAdapter.replaceAt(position,item)
+                mAdapter.replaceAt(position, item)
             }
         }
     }
@@ -94,7 +84,6 @@ class FakeManagerActivity : BaseActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return true
             }
-
         })
     }
 
@@ -131,19 +120,22 @@ class FakeManagerActivity : BaseActivity() {
                 it.data?.let { data ->
                     val latitude = data.getDoubleExtra("latitude", 0.0)
                     val longitude = data.getDoubleExtra("longitude", 0.0)
-                    val pkg = data.getStringExtra("pkg")
+                    
+                    /*
+                     * Handled Nullable String
+                     */
+                    val pkg = data.getStringExtra("pkg") ?: ""
 
                     viewModel.setPattern(currentUserID(), pkg, BLocationManager.OWN_MODE)
                     viewModel.setLocation(currentUserID(), pkg, BLocation(latitude, longitude))
 
-                    toast(getString(R.string.set_location,latitude.toString(), longitude.toString()))
+                    toast(getString(R.string.set_location, latitude.toString(), longitude.toString()))
 
                     loadAppList()
                 }
 
             }
         }
-
 
     private fun filterApp(newText: String) {
         val newList = this.appList.filter {
@@ -162,7 +154,6 @@ class FakeManagerActivity : BaseActivity() {
         finish()
     }
 
-
     override fun onBackPressed() {
         if (viewBinding.searchView.isSearchOpen) {
             viewBinding.searchView.closeSearch()
@@ -177,7 +168,6 @@ class FakeManagerActivity : BaseActivity() {
         viewBinding.searchView.setMenuItem(item)
         return true
     }
-
 
     companion object {
         fun start(context: Context) {

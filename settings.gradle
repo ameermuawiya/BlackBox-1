@@ -1,3 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://jcenter.bintray.com' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+    }
+}
+
+rootProject.name = "BlackBox"
+
 include ':Bcore'
 include ':app'
 include ':Bcore:black-fake'
@@ -6,5 +28,3 @@ include ':Bcore:pine-xposed'
 include ':Bcore:pine-core'
 include ':Bcore:pine-xposed-res'
 include ':android-mirror'
-
-rootProject.name = "BlackBox"
