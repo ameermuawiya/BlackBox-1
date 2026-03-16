@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace "top.canyie.pine"
+    compileSdk rootProject.ext.compileSdkVer
+    buildToolsVersion rootProject.ext.buildToolsVer
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdkVer
+        targetSdk rootProject.ext.targetSdkVer
+        versionCode rootProject.ext.libVersionCode
+        versionName rootProject.ext.libVersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+        externalNativeBuild {
+            cmake {
+                cFlags '-Wall -Wextra -Werror -fvisibility=hidden -fvisibility-inlines-hidden'
+                cppFlags '-std=c++17 -fno-exceptions -fno-rtti'
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+                targets 'pine'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            version rootProject.ext.cmakeVer
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
