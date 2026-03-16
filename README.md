@@ -7,7 +7,7 @@
 > *"The only people who have anything to fear from free software are those whose products are worth even less."*
 
 ![Language](https://img.shields.io/badge/language-java-brightgreen.svg)
-![CI](https://github.com/MrCode403/BlackBox/actions/workflows/build-apk.yml/badge.svg)
+![Repository Size](https://img.shields.io/github/repo-size/MrCode403/BlackBox)
 [![Total Downloads](https://img.shields.io/github/downloads/MrCode403/BlackBox/total)](https://github.com/MrCode403/BlackBox/releases)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/MrCode403/BlackBox)
 <img src="https://img.shields.io/github/v/release/MrCode403/BlackBox?include_prereleases&label=latest%20release" alt="Latest Release">
